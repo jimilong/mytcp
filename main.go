@@ -18,7 +18,7 @@ func main() {
 	)
 	addr = fmt.Sprintf("%s:%d", "127.0.0.1", 8080)
 	serve = NewServer(addr, 100, 100, 1024)
-	serve.Start()
+	go serve.Start()
 
 	go func() {
 		http.ListenAndServe("127.0.0.1:6060", nil)
