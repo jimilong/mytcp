@@ -3,12 +3,22 @@ package main
 import (
 	"fmt"
 	"log"
+	"mytcp/bytes"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 )
+
+const preAllocSize = 64 //todo 预分配buffer大小
+
+var bufpool = sync.Pool{
+	New: func() interface{} {
+		return bytes.NewBufferSize(preAllocSize)
+	},
+}
 
 func main() {
 	var (

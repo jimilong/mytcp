@@ -65,7 +65,7 @@ func (tc *tcpConn) readLoop() {
 			return
 		default:
 		}
-		packet = &Packet{}
+		packet = &Packet{} // todo packetPool
 		if err = packet.ReadTCP(tc.reader); err != nil {
 			log.Printf("read tcp error(%v)\n", err)
 			break
@@ -108,7 +108,6 @@ func (tc *tcpConn) writeLoop() {
 				return
 			}
 		}
-
 	}
 }
 
